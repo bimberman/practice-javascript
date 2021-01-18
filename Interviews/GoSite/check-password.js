@@ -54,9 +54,11 @@ function StringChallenge(str) {
 
 // Enter the test password here:
 const form = document.getElementById("form");
-const input = document.getElementById("passValidation");
+const input = document.getElementById("pass-validation");
+const revealButton = document.getElementById("reveal-password");
 const lis = document.getElementById("validate-conditions").getElementsByTagName("li")
 let firstValidate = true;
+let reveal = false;
 
 const validate = (e) => {
   e.preventDefault();
@@ -83,5 +85,16 @@ const validate = (e) => {
   }
 }
 
+const revealOrHide = (e) => {
+  e.preventDefault();
+  reveal = !reveal;
+  if (reveal){
+    input.type = "text";
+  } else {
+    input.type = "password";
+  }
+}
+
 input.addEventListener("keyup", validate)
 form.addEventListener("submit", validate)
+revealButton.addEventListener("click", revealOrHide)

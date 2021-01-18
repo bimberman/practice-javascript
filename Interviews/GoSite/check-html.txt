@@ -1,0 +1,59 @@
+function StringChallenge(str){
+  // check to see if the string contains a closing tag
+  if(!str.includes("/")){
+    return str;
+  }
+
+  // find the indices of the opening/closing tags of the inner-most-element in the first nested HTML group
+  // start with the closing tag
+  const startClose = str.indexOf("</");
+  const endClose = str.indexOf(">", startClose);
+
+  // then count backwards from the closing tag to find its corresponding opening tag
+  let startOpen = 0;
+  let endOpen = 0;
+  for (let i = startClose-1;i>0;i--){
+    if(str[i]===">"){
+      endOpen = i;
+    }
+    if (str[i] === "<") {
+      startOpen = i;
+      break;
+    }
+  }
+
+  if (startOpen === endOpen){
+    return str;
+  }
+
+  // assign the elements type
+  const openEle = str.substring(startOpen+1, endOpen);
+  const closeEle = str.substring(startClose+2, endClose);
+
+  // check if both element types match
+  if(openEle!==closeEle){
+    // if both element types don't match, then return the opening tag
+    return openEle;
+  }
+
+  /*
+    if the closing tag isn't the last tag, then remove everything between these elements
+    Note: since both element types match, a check is required to see if this closing tag is the last closing tag (in order to not get an "out of bounds" error)
+  */
+  if(str.length > endClose) {
+    str = str.substring(0, startOpen) + str.substring(endClose+1, str.length+1)
+  }
+
+  // if there is still a closing tag in the string,
+  // then run the remaining string in a recursive manner and return the results
+  if(str.includes("/")){
+    return StringChallenge(str);
+  }
+
+  // return true if all element have corresponding opening and closing tag types that match
+  if(!str.includes("<")){
+    return true;
+  }
+
+  return str;
+}

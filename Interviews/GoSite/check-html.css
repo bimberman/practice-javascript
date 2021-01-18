@@ -11,6 +11,7 @@ h1,
 h2,
 p{
   font-family: 'Pacifico', cursive;
+  color: rgb(50,50,50);
 }
 
 h1{
@@ -47,7 +48,7 @@ p{
   text-decoration: none;
   text-align: center;
   padding: 0.5rem;
-  border: black 2px solid;
+  border: rgb(50,50,50) 2px solid;
   background: linear-gradient(to left, rgba(254,157,114,1),rgb(254, 142, 150,1));
   color: rgb(241,247,243);
 }
