@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@300&family=Pacifico&family=Roboto:ital,wght@1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="check-html.css">
+  <title>Check HTML</title>
+</head>
+<body>
+  <div class="header-container">
+    <h1>Drag & Drop Your Elements</h1>
+    <p>or start typing</p>
+  </div>
+  <div class="input">
+    <button id="reset">Reset</button>
+    <input type="text" id="elementInput" placeholder="&#10077; &#10078;">
+  </div>
+  <div class="tags-container">
+    <div class="tags-row" id="openingTags">
+      <h2>Opening tags:</h2>
+      <h3 draggable="true" class="tag div open" id="test">&lt;div&gt;</h3>
+      <h3 draggable="true" class="tag em open">&lt;em&gt;</h3>
+      <h3 draggable="true" class="tag b open">&lt;b&gt;</h3>
+      <h3 draggable="true" class="tag i open">&lt;i&gt;</h3>
+      <h3 draggable="true" class="tag p open">&lt;p&gt;</h3>
+    </div>
+    <div class="tags-row" id="closingTags">
+      <h2>Closing tags:</h2>
+      <h3 draggable="true" class="tag div close">&lt;/div&gt;</h3>
+      <h3 draggable="true" class="tag em close">&lt;/em&gt;</h3>
+      <h3 draggable="true" class="tag b close">&lt;/b&gt;</h3>
+      <h3 draggable="true" class="tag i close">&lt;/i&gt;</h3>
+      <h3 draggable="true" class="tag p close">&lt;/p&gt;</h3>
+    </div>
+  </div>
+  <div class="validation-container">
+    <h2 class="validation"></h2>
+  </div>
+  <script src="./check-html.js"></script>
+</body>
+</html>

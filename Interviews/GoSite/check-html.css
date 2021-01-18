@@ -1,0 +1,57 @@
+h1,
+h2,
+input,
+p,
+button,
+.tag{
+  margin-left: 1rem;
+}
+
+h1,
+h2,
+p{
+  font-family: 'Pacifico', cursive;
+}
+
+h1{
+  margin-bottom: 0;
+}
+
+input{
+  font-family: 'Roboto', serif;
+  font-size: 2rem;
+  min-width: 500px;
+}
+
+button{
+  font-size: 2rem;
+  font-family: 'Roboto', serif;
+  text-decoration: none;
+  text-align: center;
+  background:  rgb(50,50,50);
+  color: rgb(241,247,243);
+}
+
+p{
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.tags-row{
+  display: flex;
+}
+
+.tag{
+  font-family: 'Fraunces', serif;
+  width: 3rem;
+  text-decoration: none;
+  text-align: center;
+  padding: 0.5rem;
+  border: black 2px solid;
+  background: linear-gradient(to left, rgba(254,157,114,1),rgb(254, 142, 150,1));
+  color: rgb(241,247,243);
+}
+
+.tag.close{
+  background: linear-gradient(to right, rgba(254,157,114,1),rgb(254, 142, 150,1));
+}

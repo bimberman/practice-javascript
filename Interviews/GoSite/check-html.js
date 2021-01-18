@@ -1,5 +1,4 @@
 function StringChallenge(str){
-
   // check to see if the string contains a closing tag
   if(!str.includes("/")){
     return str;
@@ -23,6 +22,10 @@ function StringChallenge(str){
     }
   }
 
+  if (startOpen === endOpen){
+    return str;
+  }
+
   // assign the elements type
   const openEle = str.substring(startOpen+1, endOpen);
   const closeEle = str.substring(startClose+2, endClose);
@@ -44,9 +47,99 @@ function StringChallenge(str){
   // if there is still a closing tag in the string,
   // then run the remaining string in a recursive manner and return the results
   if(str.includes("/")){
-    return StringChallenge(str, i+1);
+    return StringChallenge(str);
   }
 
   // return true if all element have corresponding opening and closing tag types that match
-  return true;
+  if(!str.includes("<")){
+    return true;
+  }
+
+  return str;
 }
+
+const input = document.getElementById("elementInput");
+const tagsContainer = document.querySelector(".tags-container")
+const reset = document.getElementById("reset");
+const validation = document.querySelector(".validation")
+let draggedEle = null;
+
+const resetInput = (e) => {
+  input.value = "";
+  validate(e);
+}
+
+const validate = (e) => {
+  e.preventDefault();
+  if (event.target.value && event.target.value!==""){
+    const str = StringChallenge(event.target.value)
+    validation.textContent = str === true ? "Looks good" : `Please change the ${str} element`;
+  } else {
+    validation.textContent = "";
+  }
+}
+
+const removeQuotes = (e) => {
+  if (e.target.value !== "") {
+    if (e.target.value.includes("❝")){
+      e.target.value = e.target.value.substring(1, e.target.value.length)
+    }
+    if (e.target.value.includes("❞")){
+      e.target.value = e.target.value.substring(0, e.target.value.length - 1);
+    }
+  }
+}
+
+const addQuotes = (e) => {
+  if (e.target.value !== "") {
+    if (!e.target.value.includes("❝")) {
+      e.currentTarget.value = "❝" + e.currentTarget.value;
+    }
+    if (!e.target.value.includes("❞")) {
+      e.target.value += "❞";
+    }
+  }
+}
+
+input.addEventListener("change", validate);
+input.addEventListener("keyup", validate);
+input.addEventListener("focus", removeQuotes);
+input.addEventListener("blur", addQuotes);
+reset.addEventListener("click", resetInput);
+
+tagsContainer.addEventListener("dragstart", (event) => {
+  // store a ref. on the dragged elem
+  draggedEle = event.target;
+  // make it mostly transparent
+  draggedEle.style.opacity = .2;
+});
+
+tagsContainer.addEventListener("dragend", (event) => {
+  // remove transparency (makes it opaque)
+  draggedEle.style.opacity = "";
+  if (input.style.background === "cornsilk") {
+    input.style.background = "";
+  }
+});
+
+input.addEventListener("dragover", (event) => {
+  // prevent default to allow drop
+  event.preventDefault();
+}, false);
+
+input.addEventListener("dragenter", (event) => {
+  event.target.style.background = "cornsilk";
+}, false);
+
+input.addEventListener("drop", (event) => {
+  event.preventDefault();
+  removeQuotes(event);
+  const str = StringChallenge(event.target.value)
+  validation.textContent = str === true ? "" : str;
+
+  // move dragged elem to the selected drop target
+  event.target.style.background = "";
+  event.target.value += draggedEle.textContent;
+  validate(event);
+  addQuotes(event);
+}, false);
